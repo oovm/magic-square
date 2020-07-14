@@ -1,0 +1,12 @@
+[package]
+name = "magicsquare"
+version = "0.2.1"
+authors = ["Aster <galaster@foxmail.com>"]
+description = "magic square"
+edition = "2018"
+license = "MPL-2.0"
+readme = "README.md"
+repository = "https://github.com/GalAster/magic-square-rs"
+exclude = ["/tests/*", "/.idea/*", "/benches/*"]
+
+[dependencies]
