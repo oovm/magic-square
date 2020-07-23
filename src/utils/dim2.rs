@@ -29,7 +29,21 @@ fn even(n: usize) -> Vec<Vec<usize>> {
 }
 
 fn double_even(n: usize) -> Vec<Vec<usize>> {
-    unimplemented!()
+    let bits = 0b1001_0110_0110_1001usize;
+    let size = n * n;
+    let sub = n / 4;
+    let mut i = 0;
+    (0..n)
+        .map(|r| {
+            (0..n)
+                .map(|c| {
+                    i += 1;
+                    let bit_pos = c / sub + (r / sub) * 4;
+                    if bits & (1 << bit_pos) != 0 { i } else { size - i + 1 }
+                })
+                .collect()
+        })
+        .collect()
 }
 
 pub fn magic(n: usize) -> Vec<Vec<usize>> {
@@ -48,9 +62,7 @@ pub fn magic(n: usize) -> Vec<Vec<usize>> {
     }
 }
 
-#[test]
-fn main() {
-    let n = 3;
+pub fn magic_print(n: usize) {
     let width = (n * n).to_string().len() + 1;
     let sum = (n * n + 1) * n / 2;
     println!("The sum of the rank-{} square is {}.", n, sum);

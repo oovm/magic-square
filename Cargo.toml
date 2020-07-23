@@ -1,8 +1,8 @@
 [package]
 name = "magicsquare"
-version = "0.2.1"
+version = "0.1.0"
 authors = ["Aster <galaster@foxmail.com>"]
-description = "magic square"
+description = "magic square/cube generation"
 edition = "2018"
 license = "MPL-2.0"
 readme = "README.md"
