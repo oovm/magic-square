@@ -1,6 +1,12 @@
+//! https://github.com/GalAster/WolframFunctionRepository/blob/master/MagicSquare/MagicSquare.m
+
 #[rustfmt::skip]
 fn odd(n: usize) -> Vec<Vec<usize>> {
-    (0..n).map(|r| (0..n).map(|c| n * (((c + 1) + (r + 1) - 1 + (n >> 1)) % n) + (((c + 1) + (2 * (r + 1)) - 2) % n) + 1).collect()).collect()
+    (0..n).map(|r|
+        (0..n).map(|c|
+            n * (((c + 1) + (r + 1) - 1 + (n >> 1)) % n) + (((c + 1) + (2 * (r + 1)) - 2) % n) + 1
+        ).collect()
+    ).collect()
 }
 
 #[rustfmt::skip]
@@ -28,6 +34,7 @@ fn even(n: usize) -> Vec<Vec<usize>> {
         .collect()
 }
 
+#[rustfmt::skip]
 fn double_even(n: usize) -> Vec<Vec<usize>> {
     let bits = 0b1001_0110_0110_1001usize;
     let size = n * n;
@@ -51,7 +58,7 @@ pub fn magic(n: usize) -> Vec<Vec<usize>> {
         // no solution
         vec![]
     }
-    else if n % 2 == 1 {
+    else if n % 2 != 0 {
         odd(n)
     }
     else if n % 4 != 0 {
