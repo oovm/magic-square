@@ -1,12 +1,66 @@
 //! https://github.com/GalAster/WolframFunctionRepository/blob/master/MagicSquare/MagicSquare.m
 
+use ndarray::{arr2, Array2, NdIndex};
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
+
+pub struct MagicSquare(usize);
+
+impl MagicSquare {
+    pub fn line_sum(&self) -> usize {
+        let n = *self.0;
+        n * (((n * n) + 1) / 2)
+    }
+    pub fn sum(&self) -> usize {
+
+    }
+    pub fn get_position(&self) -> (usize, usize) {
+        todo!()
+    }
+
+    pub fn get_array(&self) -> Option<Array2<usize>> {
+        match self.0 {
+            0 | 2 => { None }
+            n if n % 2 != 0 => Some(self.odd()),
+            n if n % 4 != 0 => Some(self.even()),
+            _ => self.double_even(),
+        }
+    }
+
+    fn odd(&self) -> Array2<usize> {
+        let mut matrix = Array2::zeros((self.0, self.0));
+        for line in 0..self.0 {
+            for column in 0..self.0 {
+                matrix[[line, column]] = odd_nlr(self.0, line, column)
+            }
+        }
+        matrix
+    }
+    fn double_even(&self) -> Array2<usize> {
+        let mut matrix = Array2::zeros((self.0, self.0));
+
+        todo!()
+    }
+    fn even(&self) -> Array2<usize> {
+        let mut matrix = Array2::zeros((self.0, self.0));
+
+        todo!()
+    }
+}
+
+fn odd_nlr(n: usize, l: usize, c: usize) -> usize {
+    n * (((c + 1) + (l + 1) - 1 + (n >> 1)) % n) + (((c + 1) + (2 * (l + 1)) - 2) % n) + 1
+}
+
+#[test]
+fn test() {
+    let m3 = double_even(6);
+    println!("{:?}", m3);
+}
+
+
 #[rustfmt::skip]
 fn odd(n: usize) -> Vec<Vec<usize>> {
-    (0..n).map(|r|
-        (0..n).map(|c|
-            n * (((c + 1) + (r + 1) - 1 + (n >> 1)) % n) + (((c + 1) + (2 * (r + 1)) - 2) % n) + 1
-        ).collect()
-    ).collect()
+    todo!()
 }
 
 #[rustfmt::skip]
@@ -39,12 +93,11 @@ fn double_even(n: usize) -> Vec<Vec<usize>> {
     let bits = 0b1001_0110_0110_1001usize;
     let size = n * n;
     let sub = n / 4;
-    let mut i = 0;
     (0..n)
         .map(|r| {
             (0..n)
                 .map(|c| {
-                    i += 1;
+                    let i = r * n + c + 1;
                     let bit_pos = c / sub + (r / sub) * 4;
                     if bits & (1 << bit_pos) != 0 { i } else { size - i + 1 }
                 })
@@ -57,14 +110,11 @@ pub fn magic(n: usize) -> Vec<Vec<usize>> {
     if n == 0 | 2 {
         // no solution
         vec![]
-    }
-    else if n % 2 != 0 {
+    } else if n % 2 != 0 {
         odd(n)
-    }
-    else if n % 4 != 0 {
+    } else if n % 4 != 0 {
         even(n)
-    }
-    else {
+    } else {
         double_even(n)
     }
 }

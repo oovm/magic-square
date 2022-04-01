@@ -6,7 +6,9 @@ description = "magic square/cube generation"
 edition = "2018"
 license = "MPL-2.0"
 readme = "README.md"
-repository = "https://github.com/GalAster/magic-square-rs"
+repository = "https://github.com/oovm/magic-square-rs"
 exclude = ["/tests/*", "/.idea/*", "/benches/*"]
 
 [dependencies]
+rayon = "1.5.1"
+ndarray = "0.15.4"
