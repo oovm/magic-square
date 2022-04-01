@@ -4,6 +4,7 @@ use ndarray::Array3;
 
 pub struct MagicCube(usize);
 
+// noinspection DuplicatedCode
 impl MagicCube {
     pub fn get_array(&self) -> Option<Array3<usize>> {
         match self.0 {
