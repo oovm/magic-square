@@ -1,2 +1,2 @@
-pub(crate) mod utils;
-pub use utils::{dim2, dim3};
+mod utils;
+pub use self::utils::MagicSquare;
