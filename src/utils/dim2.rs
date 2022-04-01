@@ -1,8 +1,9 @@
 //! https://github.com/GalAster/WolframFunctionRepository/blob/master/MagicSquare/MagicSquare.m
 
-use ndarray::{Array2, NdIndex};
+use ndarray::Array2;
 use std::fmt::{Debug, Display, Formatter};
 
+#[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct MagicSquare(usize);
 
 // noinspection DuplicatedCode
@@ -96,14 +97,20 @@ impl MagicSquare {
     }
 }
 
-impl Debug for MagicSquare {}
+impl Debug for MagicSquare {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("MagicSquare") //
+            .field("rank", &self.0)
+            .field("line_sum", &self.line_sum())
+            .field("sum", &self.sum())
+            .finish()
+    }
+}
 
 impl Display for MagicSquare {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         let array = match self.get_array() {
-            None => {
-                return Ok(());
-            }
+            None => return Ok(()),
             Some(s) => s,
         };
         let width = (self.0 * self.0).to_string().len() + 1;

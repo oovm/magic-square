@@ -1,2 +1,3 @@
+mod export;
 mod utils;
-pub use self::utils::MagicSquare;
+pub use self::utils::{MagicCube, MagicSquare, MagicSquareAll};

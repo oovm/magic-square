@@ -1,14 +1,18 @@
 [package]
 name = "magicsquare"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Aster <galaster@foxmail.com>"]
 description = "magic square/cube generation"
 edition = "2018"
 license = "MPL-2.0"
 readme = "README.md"
 repository = "https://github.com/oovm/magic-square-rs"
-exclude = ["/tests/*", "/.idea/*", "/benches/*"]
+documentation = "https://docs.rs/magicsquare"
+exclude = ["tests/", "benches/"]
 
 [dependencies]
-rayon = "1.5.1"
+ndarray-csv = { version = "0.5.1", optional = true }
 ndarray = "0.15.4"
+
+[features]
+default = ["ndarray-csv"]
