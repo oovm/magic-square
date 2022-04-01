@@ -1,10 +1,10 @@
 mod dim2;
-pub mod dim3;
 mod dim2_all;
+pub mod dim3;
 
 #[test]
 fn test() {
-    let m3 = MagicSquare::new(11);
+    let m3 = MagicSquare::new(7);
     println!("{}", m3);
 }
 
